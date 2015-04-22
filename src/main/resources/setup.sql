@@ -1,0 +1,20 @@
+use test
+
+CREATE TABLE Lista (
+     id MEDIUMINT NOT NULL AUTO_INCREMENT,
+     codigo VARCHAR(5) NOT NULL UNIQUE,
+     nombre VARCHAR(50) NOT NULL,
+     PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+CREATE TABLE Elemento (
+	id MEDIUMINT NOT NULL AUTO_INCREMENT,
+    lista MEDIUMINT NOT NULL,
+    codigo VARCHAR(5) NOT NULL UNIQUE,
+    etiqueta VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+
+ALTER TABLE Elemento ADD CONSTRAINT fk_lista 
+    FOREIGN KEY (lista) REFERENCES Lista(id);;

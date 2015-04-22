@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Iniciar sesión</title>
+        <link rel="stylesheet" type="text/css" href="/css/forms.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/mensaje.css"/>
+    </head>
+    <body>
+        <div th:if="${param.error}" class="alert-box error" style="text-align: center;">
+			<span>error!</span> <label>Nombre de usuario y/o contraseña no válidas.</label>
+		</div>
+	
+		<div th:if="${param.logout}" class="alert-box notice" style="text-align: center;">
+			<span>notice!</span> <label>Has cerrado sesión.</label>
+		</div>
+		
+        <form th:action="@{/login}" th:method="POST" class="smart-green">
+	        <h1>Iniciar sesión
+		        <span>Introduce tu nombre y tu contraseña para poder iniciar sesión.</span>
+		    </h1>
+            <div>
+            	<label for="username">Usuario</label>
+            	<input type="text" id="username" name="username"/>
+            </div>
+            <div>
+            	<label for="usuario">Contraseña</label>
+            	<input type="password" id="password" name="password"/>
+            </div>
+            <div>
+    			<button type="submit" class="button" value="sign in">Iniciar sesión</button>
+    		</div>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pantalla principal</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/boton.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+</head>
+<body>
+	<h1>Menú principal</h1>
+	<h2>Elige una opción</h2>
+    <div class="btn" onclick="location.href='/lista'">Ver todas las Listas</div>
+    <div class="btn" onclick="location.href='/elemento'">Ver todos los Elementos</div>
+    <form th:action="@{/logout}" th:method="POST" th:if="${#httpServletRequest.remoteUser}" style="text-align: center;">
+    	<button type="submit" class="btn red" value="sign out">Cerrar sesión</button>
+    </form>
+</body>
+</html>

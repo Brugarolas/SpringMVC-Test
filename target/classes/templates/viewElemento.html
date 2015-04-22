@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Elemento</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/tabla.css" />
+    <link rel="stylesheet" type="text/css" href="/css/forms.css" />
+    <link rel="stylesheet" type="text/css" href="/css/boton.css" />
+</head>
+<body>
+	<table class="lista">
+		<tr>
+	        <th>ID</th>
+	        <th>Código</th>
+	        <th>Etiqueta</th>
+		</tr>
+		<tr class="alt">
+			<td><label th:text="${elemento.id}"></label></td>
+			<td><label th:text="${elemento.codigo}"></label></td>
+			<td><label th:text="${elemento.etiqueta}"></label></td>
+		</tr>
+	</table>
+	
+	<h2 style="padding-top: 25px; text-align: center;">Lista en la que se encuentra</h2>
+	<table class="lista">
+		<tr>
+	        <th>ID</th>
+	        <th>Código</th>
+	        <th>Nombre</th>
+		</tr>
+		<tr class="alt">
+			<td><a th:href="@{/lista/get(id=${elemento.lista.id})}"><label th:text="${elemento.lista.id}"></label></a></td>
+			<td><label th:text="${elemento.lista.codigo}"></label></td>
+			<td><label th:text="${elemento.lista.nombre}"></label></td>
+		</tr>
+	</table>
+	
+	<form action="#" th:action="@{/elemento/update(id=${elemento.id})}" th:method="PUT" class="smart-green">
+    	<h1>Modificar un nuevo Elemento
+	        <span>Rellena todas las casillas y pulsa el botón Guardar.</span>
+	    </h1>
+    	<div>
+    		<label for="codigo">Código</label>
+    		<input type="text" id="codigo" name="codigo" th:value="${elemento.codigo}"/>
+    	</div>
+    	<div>
+    		<label for="etiqueta">Etiqueta</label>
+    		<input type="text" id="etiqueta" name="etiqueta" th:value="${elemento.etiqueta}"/>
+    	</div>
+    	<div>
+    		<label for="lista">Lista</label>
+    		<select id="lista" name="lista">
+    			<option th:each="listValue: ${listas}" th:value="${listValue.id}" th:text="${listValue}" th:selected="${elemento.lista.id == listValue.id}"></option>
+    		</select>
+    	</div>
+    	<div>
+    		<button type="submit" class="button">Guardar</button>
+    	</div>
+    </form>
+    
+    <form action="#" th:action="@{/elemento/delete(id=${elemento.id})}" th:method="DELETE" class="smart-green">
+    	<h1>Eliminar el Elemento
+	        <span>Pulsa el botón Eliminar para eliminar el Elemento. ¡Atención! Esta operación no se puede deshacer.</span>
+	    </h1>
+	    <button type="submit" class="button red">Eliminar</button>
+	</form>
+	
+	<div class="btn" onclick="location.href='/elemento'">Ver todos los Elementos</div>
+</body>
+</html>

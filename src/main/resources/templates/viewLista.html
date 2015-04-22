@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/tabla.css" />
+    <link rel="stylesheet" type="text/css" href="/css/forms.css" />
+    <link rel="stylesheet" type="text/css" href="/css/boton.css" />
+</head>
+<body>
+	<table class="lista">
+		<tr>
+	        <th>ID</th>
+	        <th>Código</th>
+	        <th>Nombre</th>
+	        <th>Nº elementos</th>
+		</tr>
+		<tr class="alt">
+			<td><label th:text="${list.id}"></label></td>
+			<td><label th:text="${list.codigo}"></label></td>
+			<td><label th:text="${list.nombre}"></label></td>
+			<td><label th:text="${#lists.size(list.elementos)}"></label></td>
+		</tr>
+	</table>
+	
+	<h2 style="padding-top: 25px; text-align: center;">Elementos que contiene</h2>
+	<table class="lista">
+		<tr>
+	        <th>ID</th>
+	        <th>Código</th>
+	        <th>Etiqueta</th>
+		</tr>
+		<tr th:each="listValue, iterStat : ${list.elementos}" th:class="${iterStat.odd} ? 'alt'">
+			<td><a th:href="@{/elemento/get(id=${listValue.id})}"><label th:text="${listValue.id}"></label></a></td>
+			<td><label th:text="${listValue.codigo}"></label></td>
+			<td><label th:text="${listValue.etiqueta}"></label></td>
+		</tr>
+	</table>
+	
+	<form action="#" th:action="@{/lista/update(id=${list.id})}" th:method="POST" class="smart-green">
+    	<h1>Modificar la Lista
+	        <span>Rellena todas las casillas y pulsa el botón Guardar.</span>
+	    </h1>
+    	<div>
+    		<label for="codigo">Código</label>
+    		<input type="text" id="codigo" name="codigo" th:value="${list.codigo}"/>
+    	</div>
+    	<div>
+    		<label for="nombre">Nombre</label>
+    		<input type="text" id="nombre" name="nombre" th:value="${list.nombre}"/>
+    	</div>
+    	<div>
+    		<button type="submit" class="button">Guardar</button>
+    	</div>
+    </form>
+    
+    <form action="#" th:action="@{/lista/delete(id=${list.id})}" th:method="DELETE" class="smart-green">
+    	<h1>Eliminar la Lista
+	        <span>Pulsa el botón Eliminar para eliminar la Lista. ¡Atención! Esta operación no se puede deshacer, y además borrará todos los Elementos contenidos en la lista.</span>
+	    </h1>
+	    <button type="submit" class="button red">Eliminar</button>
+	</form>
+	
+	<div class="btn" onclick="location.href='/lista'">Ver todas las Listas</div>
+</body>
+</html>

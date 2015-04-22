@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mensaje</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/mensaje.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/boton.css"/>
+</head>
+<body>
+	<div th:class="${messageClass != 0} ? 'inv' : 'alert-box error'">
+		<span>error!</span> <label th:text="${message}"></label>
+	</div>
+	<div th:class="${messageClass != 1} ? 'inv' : 'alert-box success'">
+		<span>success!</span> <label th:text="${message}"></label>
+	</div>
+	<div th:class="${messageClass != 2} ? 'inv' : 'alert-box warning'">
+		<span>warning!</span> <label th:text="${message}"></label>
+	</div>
+	<div th:class="${messageClass != 3} ? 'inv' : 'alert-box notice'">
+		<span>notice!</span> <label th:text="${message}"></label>
+	</div>
+	
+	<div class="btn" onclick="location.href='..'">Volver</div>
+</body>
+</html>

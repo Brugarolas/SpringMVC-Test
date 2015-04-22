@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/tabla.css" />
+    <link rel="stylesheet" type="text/css" href="/css/forms.css" />
+    <link rel="stylesheet" type="text/css" href="/css/boton.css" />
+</head>
+<body>
+	<table class="lista">
+		<tr>
+	        <th>ID</th>
+	        <th>Lista</th>
+	        <th>Código</th>
+	        <th>Etiqueta</th>
+		</tr>
+		<tr th:each="listValue, iterStat : ${elementos}" th:class="${iterStat.odd} ? 'alt'">
+			<td><a th:href="@{/elemento/get(id=${listValue.id})}"><label th:text="${listValue.id}"></label></a></td>
+			<td><a th:href="@{/lista/get(id=${listValue.lista.id})}"><label th:text="${listValue.lista}"></label></a></td>
+			<td><label th:text="${listValue.codigo}"></label></td>
+			<td><label th:text="${listValue.etiqueta}"></label></td>
+		</tr>
+	</table>
+	
+	<form action="#" th:action="@{/elemento/save}" th:method="PUT" class="smart-green">
+    	<h1>Añadir un nuevo Elemento
+	        <span>Rellena todas las casillas y pulsa el botón Añadir.</span>
+	    </h1>
+    	<div>
+    		<label for="codigo">Código</label>
+    		<input type="text" id="codigo" name="codigo"/>
+    	</div>
+    	<div>
+    		<label for="nombre">Etiqueta</label>
+    		<input type="text" id="etiqueta" name="etiqueta"/>
+    	</div>
+    	<div>
+    		<label for="lista">Lista</label>
+    		<select id="lista" name="lista">
+    			<option th:each="listValue: ${listas}" th:value="${listValue.id}" th:text="${listValue}"></option>
+    		</select>
+    	</div>
+    	<div>
+    		<button type="submit" class="button">Añadir</button>
+    	</div>
+    </form>
+	
+	<div class="btn" onclick="location.href='/'">Volver al menú principal</div>
+</body>
+</html>
